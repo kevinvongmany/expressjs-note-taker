@@ -55,8 +55,26 @@ app.get('/api/notes/:id', (req, res) => {
             return;
         }
         const notes = JSON.parse(data);
-        const note = notes.find(note => note.id === parseInt(req.params.id));
+        const note = notes.find(note => note.id === req.params.id);
         res.json(note);
+    });
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+    fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        const notes = JSON.parse(data);
+        const updatedNotes = notes.filter(note => note.id !== req.params.id);
+        fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(updatedNotes, null, 4), (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            res.json({ message: 'Note deleted' });
+        });
     });
 });
 
