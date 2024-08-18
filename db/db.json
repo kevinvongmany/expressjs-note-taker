@@ -1,12 +1,7 @@
 [
     {
         "id": "1",
-        "title": "Test Title",
-        "text": "Test text"
-    },
-    {
-        "id": "fkunbt17colu1ihbc9jz",
-        "title": "A test note",
-        "text": "This one should have a unique ID"
+        "title": "Click here!",
+        "text": "This is an example note, click on New Note button to add your own! ^"
     }
 ]
