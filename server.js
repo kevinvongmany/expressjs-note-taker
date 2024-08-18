@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const generateUniqueId = require('generate-unique-id');
 
 const app = express();
 
@@ -15,15 +16,19 @@ app.get('/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    console.log(req.body);
     fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err);
             return;
         }
+        const note = {
+            id: generateUniqueId(),
+            title: req.body.title,
+            text: req.body.text
+        };
         const notes = JSON.parse(data);
-        notes.push(req.body);
-        fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes), (err) => {
+        notes.push(note);
+        fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes, null, 4), (err) => {
             if (err) {
                 console.error(err);
                 return;
@@ -32,6 +37,7 @@ app.post('/api/notes', (req, res) => {
         });
     });
 });
+
 app.get('/api/notes', (req, res) => {
     fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
         if (err) {
@@ -42,6 +48,17 @@ app.get('/api/notes', (req, res) => {
     });
 });
 
+app.get('/api/notes/:id', (req, res) => {
+    fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        const notes = JSON.parse(data);
+        const note = notes.find(note => note.id === parseInt(req.params.id));
+        res.json(note);
+    });
+});
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
