@@ -1,5 +1,5 @@
 # ExpressJS Note Taker
-A web application that allows users to enter in and manage custom notes through user input. Backend data and API endpoints developed using the ExpressJS framework.
+A web application that allows users to add, view and delete custom notes through user input. Backend data and API endpoints developed using the ExpressJS framework.
 
 This web application can be found here: 
 
