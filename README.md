@@ -16,8 +16,11 @@ https://expressjs-note-taker-c33i.onrender.com/
 
 ## Resources
 
+Outlined below are external and open source resources used to develop this application.
+
 | Resource | Description |
 | -------- | ----------- |
+| [Bootstrap CDN](https://getbootstrap.com/) | HTML CSS web framework, specifically for front-end |
 | [NodeJS](https://nodejs.org/en) | Cross-platform JavaScript runtime environment |
 | [bun](https://bun.sh/) | Faster JavaScript runtime environment (npm/yarn alternative) |
 | [ExpressJS](https://expressjs.com/) | NodeJS web framework with API and middleware capabilities |
